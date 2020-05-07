@@ -10,9 +10,9 @@ import {BountyAmountTotal} from "./bounty/BountyAmountTotal";
 import {BountyCount} from "./bounty/BountyCount";
 import {BountyTable} from "./bounty/BountyTable";
 
-import {SettledCount} from "./settled/SettledCount";
-import {SettledPayoutTotal} from "./settled/SettledPayoutTotal";
-import {SettledTable} from "./settled/SettledTable";
+// import {SettledCount} from "./settled/SettledCount";
+// import {SettledPayoutTotal} from "./settled/SettledPayoutTotal";
+// import {SettledTable} from "./settled/SettledTable";
 
 export const Dashboard = props => (
   <section>
@@ -33,12 +33,12 @@ export const Dashboard = props => (
         <AssertionBidTotal />
         <AssertionTable />
       </div>
-      <div>
+      {/* <div>
         <h3>settled bounties</h3>
         <SettledCount />
         <SettledPayoutTotal />
         <SettledTable />
-      </div>
+      </div> */}
     </div>
   </section>
 );
