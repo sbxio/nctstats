@@ -10,7 +10,7 @@ import {Main} from "./main/Main";
 export const App = props => {
   return (
     <Provider store={store}>
-      <Router basename={process.env.BASE_NAME}>
+      <Router basename={process.env.PUBLIC_URL}>
         <ErrorBoundary>
           <Main />
         </ErrorBoundary>
