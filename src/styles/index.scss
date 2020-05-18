@@ -7,3 +7,25 @@ body {
   font-size: 12px;
   -webkit-font-smoothing: antialiased;
 }
+
+* {
+  box-sizing: border-box;
+  cursor: default !important;
+}
+
+@keyframes beacon {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: inline-block;
+    opacity: 0;
+  }
+
+  100% {
+    display: inline-block;
+    opacity: 1;
+  }
+}

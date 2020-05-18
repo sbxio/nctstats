@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {ResponsiveContainer, BarChart, Bar} from "recharts";
 
+import {SvgBarChart} from "components/charting/SvgBarChart";
+import {Nectar} from "components/Nectar";
 import * as eventTypes from "store/messages/eventTypes";
 
 const community_id = "wss://nu.k.polyswarm.network/v1/events/?chain=side";
+const max_no_of_data_points = 20;
 
 export const AssertionBidByBlock = props => {
   const message = useSelector(state => state.messages[community_id][eventTypes.ASSERTION].last);
@@ -15,26 +17,34 @@ export const AssertionBidByBlock = props => {
       setData(data => {
         let index = data.findIndex(block => block.name === message.block_number);
         if (index === -1) {
-          if (data.length === 20) {
+          if (data.length === max_no_of_data_points) {
             data.shift();
           }
-          return [...data, {name: message.block_number, bid: message.bid}];
+          return [...data, {name: message.block_number, h: message.bid}];
         } else {
-          data[index].bid += message.bid;
+          data[index].h += message.bid;
           return [...data];
         }
       });
     }
   }, [message]);
 
+  let H = data.length ? Math.max(...data.map(d => d.h)) : 0;
+  let total = data.reduce((accumulator, currentValue) => accumulator + currentValue.h, 0);
+  let avg = total === 0 ? 0 : total / data.length;
+
   return (
-    <div style={{marginBottom: '1.618em'}}>
-      <ResponsiveContainer width="100%" height={100}>
-        <BarChart data={data}>
-          <Bar dataKey="bid" fill="#6d3aec" />
-        </BarChart>
-      </ResponsiveContainer>
-      <div>assertion bid total by block</div>
+    <div style={{height: "10em", marginBottom: "1.618em"}}>
+      <SvgBarChart
+        data={data}
+        maxNoOfDataPoints={max_no_of_data_points}
+        H={H}
+        avg={avg}
+        avgLineStrokeWidth={(H * 2) / 120}
+      />
+      <div>
+        average per block <Nectar amount={avg} />
+      </div>
     </div>
   );
 };
