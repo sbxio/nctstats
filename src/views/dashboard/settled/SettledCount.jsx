@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 
 import * as eventTypes from "store/messages/eventTypes";
 
-const community_id = "wss://nu.k.polyswarm.network/v1/events/?chain=side";
+const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
 
 export const SettledCount = props => {
   const count = useSelector(state => state.messages[community_id][eventTypes.SETTLED].count);

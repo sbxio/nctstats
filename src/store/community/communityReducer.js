@@ -7,7 +7,6 @@ export const communityReducer = (state = {}, action) =>
     switch (action.type) {
       case actionTypes.COMMUNITY_CONNECT:
         draft[action.community_url] = {
-          community_name: action.community_name,
           community_url: action.community_url,
           connection: {
             initiated: Date.now(),

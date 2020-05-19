@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {Nectar} from "components/Nectar";
 import * as eventTypes from "store/messages/eventTypes";
 
-const community_id = "wss://nu.k.polyswarm.network/v1/events/?chain=side";
+const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
 
 export const AssertionBidTotal = props => {
   const total_bid = useSelector(state => state.messages[community_id][eventTypes.ASSERTION].total_bid);

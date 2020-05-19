@@ -17,7 +17,7 @@ import {BountyTable} from "./bounty/BountyTable";
 // import {SettledPayoutTotal} from "./settled/SettledPayoutTotal";
 // import {SettledTable} from "./settled/SettledTable";
 
-const community_id = "wss://nu.k.polyswarm.network/v1/events/?chain=side";
+const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
 
 export const Dashboard = props => {
   const connClosed = useSelector(state => state.community[community_id].connection.closed);
@@ -76,7 +76,7 @@ export const Dashboard = props => {
               animation: connClosed ? null : "beacon 1.2s infinite ease-in-out",
             }}
           />
-          <span>wss://nu.k.polyswarm.network/v1/events/?chain=side</span>
+          <span>{community_id}</span>
         </div>
       </header>
 

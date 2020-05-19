@@ -1,9 +1,8 @@
 import * as actionTypes from "./communityActionTypes";
 
-const _connect = (community_name, community_url) => dispatch => {
+const _connect = community_url => dispatch => {
   dispatch({
     type: actionTypes.COMMUNITY_CONNECT,
-    community_name,
     community_url,
   });
 
@@ -12,7 +11,6 @@ const _connect = (community_name, community_url) => dispatch => {
   conn.onopen = event => {
     dispatch({
       type: actionTypes.COMMUNITY_CONNECT__SUCCEEDED,
-      community_name,
       community_url,
       event,
     });
@@ -21,7 +19,6 @@ const _connect = (community_name, community_url) => dispatch => {
   conn.onclose = event => {
     dispatch({
       type: actionTypes.COMMUNITY_CONNECTION__CLOSED,
-      community_name,
       community_url,
       event,
     });
@@ -30,7 +27,6 @@ const _connect = (community_name, community_url) => dispatch => {
   conn.onerror = event => {
     dispatch({
       type: actionTypes.COMMUNITY_CONNECTION__ERROR,
-      community_name,
       community_url,
       event,
     });
@@ -39,7 +35,6 @@ const _connect = (community_name, community_url) => dispatch => {
   conn.onmessage = event => {
     dispatch({
       type: actionTypes.COMMUNITY_CONNECTION_MESSAGE,
-      community_name,
       community_url,
       event,
     });
@@ -60,7 +55,6 @@ const _connect = (community_name, community_url) => dispatch => {
       .then(data => {
         dispatch({
           type: actionTypes.COMMUNITY_CONNECTION_MESSAGE__SUCCEEDED,
-          community_name,
           community_url,
           data,
         });
@@ -68,7 +62,6 @@ const _connect = (community_name, community_url) => dispatch => {
       .catch(err => {
         dispatch({
           type: actionTypes.COMMUNITY_CONNECTION_MESSAGE__FAILED,
-          community_name,
           community_url,
           err,
         });
@@ -76,9 +69,6 @@ const _connect = (community_name, community_url) => dispatch => {
   };
 };
 
-export const registerCommunityAction = (
-  community_name,
-  community_url,
-) => dispatch => {
-  _connect(community_name, community_url)(dispatch);
+export const registerCommunityAction = community_url => dispatch => {
+  _connect(community_url)(dispatch);
 };

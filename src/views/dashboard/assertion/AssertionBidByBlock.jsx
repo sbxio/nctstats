@@ -5,7 +5,7 @@ import {SvgBarChart} from "components/charting/SvgBarChart";
 import {Nectar} from "components/Nectar";
 import * as eventTypes from "store/messages/eventTypes";
 
-const community_id = "wss://nu.k.polyswarm.network/v1/events/?chain=side";
+const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
 const max_no_of_data_points = 20;
 
 export const AssertionBidByBlock = props => {
