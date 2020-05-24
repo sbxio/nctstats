@@ -9,11 +9,9 @@ export const BountyAmountTotal = props => {
   const total_amount = useSelector(state => state[reducers.messages][props.community][eventTypes.BOUNTY].total_amount);
 
   return (
-    <div>
-      <div>total amount</div>
-      <div>
-        <Nectar amount={total_amount || 0} />
-      </div>
+    <div style={{textAlign: "right"}}>
+      <div style={{fontWeight: 500}}>total rolling amount</div>
+      <Nectar amount={total_amount || 0} />
     </div>
   );
 };

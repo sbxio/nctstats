@@ -9,11 +9,9 @@ export const AssertionBidTotal = props => {
   const total_bid = useSelector(state => state[reducers.messages][props.community][eventTypes.ASSERTION].total_bid);
 
   return (
-    <div>
-      <div>total bid</div>
-      <div>
-        <Nectar amount={total_bid || 0} />
-      </div>
+    <div style={{textAlign: "right"}}>
+      <div style={{fontWeight: 500}}>total rolling amount</div>
+      <Nectar amount={total_bid || 0} />
     </div>
   );
 };

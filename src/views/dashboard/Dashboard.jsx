@@ -25,7 +25,7 @@ export const Dashboard = props => {
 
   return (
     <section>
-      <header style={{display: "flex", flexDirection: "row", alignItems: "center", padding: "0.618em 1.618em"}}>
+      <header style={{display: "flex", flexDirection: "row", alignItems: "center", padding: "0.618em 1.618em 3em"}}>
         <div
           style={{
             background: colors.purple,
@@ -70,25 +70,41 @@ export const Dashboard = props => {
       <div style={{display: "flex", flexDirection: "row", flexWrap: "nowrap"}}>
         <HorizontalDivider />
         <div>
-          <h3>bounties</h3>
-          <BountyAmountByBlock community={community} />
+          <div>
+            <h3 style={{margin: "0", padding: "0", textTransform: "uppercase"}}>bounties by block</h3>
+            <BountyAmountByBlock community={community} />
+          </div>
           <VerticalDivider />
-          <BountyCount community={community} />
+          <div>
+            <h3 style={{margin: "0", padding: "0", textTransform: "uppercase"}}>assertions by block</h3>
+            <AssertionBidByBlock community={community} />
+          </div>
           <VerticalDivider />
-          <BountyAmountTotal community={community} />
+          <div>
+            <h3 style={{margin: "0", padding: "0", textTransform: "uppercase"}}>assertions by bounty</h3>
+            <AssertionBidByBounty community={community} />
+          </div>
+        </div>
+        <HorizontalDivider />
+        <HorizontalDivider />
+        <div>
+          <h3 style={{margin: "0", padding: "0", textTransform: "uppercase"}}>bounties</h3>
+          <VerticalDivider />
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <BountyCount community={community} />
+            <BountyAmountTotal community={community} />
+          </div>
           <VerticalDivider />
           <BountyTable community={community} />
         </div>
         <HorizontalDivider />
         <div>
-          <h3>assertions</h3>
-          <AssertionBidByBlock community={community} />
+          <h3 style={{margin: "0", padding: "0", textTransform: "uppercase"}}>assertions</h3>
           <VerticalDivider />
-          <AssertionBidByBounty community={community} />
-          <VerticalDivider />
-          <AssertionCount community={community} />
-          <VerticalDivider />
-          <AssertionBidTotal community={community} />
+          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <AssertionCount community={community} />
+            <AssertionBidTotal community={community} />
+          </div>
           <VerticalDivider />
           <AssertionTable community={community} />
         </div>

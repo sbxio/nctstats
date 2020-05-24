@@ -9,7 +9,7 @@ export const AssertionCount = props => {
 
   return (
     <div>
-      <div>count</div>
+      <div style={{fontWeight: 500}}>rolling count</div>
       <div>{count}</div>
     </div>
   );

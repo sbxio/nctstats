@@ -9,12 +9,12 @@ export const BountyTable = props => {
   const messages = useSelector(state => state[reducers.messages][props.community][eventTypes.BOUNTY].messages);
 
   return (
-    <table>
+    <table style={{minWidth: `${443 / 12}em`}}>
       <thead>
         <tr>
-          <th style={{textAlign: "left"}}>block</th>
-          <th style={{textAlign: "left"}}>guid</th>
-          <th style={{textAlign: "right"}}>bid</th>
+          <th style={{textAlign: "left", minWidth: `${75 / 12}em`}}>block</th>
+          <th style={{textAlign: "left", minWidth: `${264 / 12}em`}}>guid</th>
+          <th style={{textAlign: "right"}}>bounty</th>
         </tr>
       </thead>
       <tbody>

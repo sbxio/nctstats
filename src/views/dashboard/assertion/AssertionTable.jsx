@@ -9,11 +9,11 @@ export const AssertionTable = props => {
   const messages = useSelector(state => state[reducers.messages][props.community][eventTypes.ASSERTION].messages);
 
   return (
-    <table>
+    <table style={{minWidth: `${443 / 12}em`}}>
       <thead>
         <tr>
-          <th style={{textAlign: "left"}}>block</th>
-          <th style={{textAlign: "left"}}>bounty guid</th>
+          <th style={{textAlign: "left", minWidth: `${75 / 12}em`}}>block</th>
+          <th style={{textAlign: "left", minWidth: `${264 / 12}em`}}>bounty guid</th>
           <th style={{textAlign: "right"}}>bid</th>
         </tr>
       </thead>
