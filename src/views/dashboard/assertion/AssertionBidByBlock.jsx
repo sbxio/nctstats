@@ -1,47 +1,31 @@
-import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import React from "react";
 
 import {SvgBarChart} from "components/charting/SvgBarChart";
 import {Nectar} from "components/Nectar";
+import {getAverage} from "functions/getAverage";
+import {useMessageGroupBy} from "hooks/useMessageGroupBy";
 import * as eventTypes from "store/messages/eventTypes";
 
 const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
 const max_no_of_data_points = 20;
 
 export const AssertionBidByBlock = props => {
-  const message = useSelector(state => state.messages[community_id][eventTypes.ASSERTION].last);
-  const [data, setData] = useState([]);
+  const data = useMessageGroupBy(community_id, eventTypes.ASSERTION, max_no_of_data_points, "block_number", "bid");
 
-  useEffect(() => {
-    if (message) {
-      setData(data => {
-        let index = data.findIndex(block => block.name === message.block_number);
-        if (index === -1) {
-          if (data.length === max_no_of_data_points) {
-            data.shift();
-          }
-          return [...data, {name: message.block_number, h: message.bid}];
-        } else {
-          data[index].h += message.bid;
-          return [...data];
-        }
-      });
-    }
-  }, [message]);
-
-  let H = data.length ? Math.max(...data.map(d => d.h)) : 0;
-  let total = data.reduce((accumulator, currentValue) => accumulator + currentValue.h, 0);
-  let avg = total === 0 ? 0 : total / data.length;
+  const H = data.length ? Math.max(...data.map(d => d.h)) : 0;
+  const avg = getAverage(data, "h");
 
   return (
-    <div style={{height: "10em", marginBottom: "1.618em"}}>
-      <SvgBarChart
-        data={data}
-        maxNoOfDataPoints={max_no_of_data_points}
-        H={H}
-        avg={avg}
-        avgLineStrokeWidth={(H * 2) / 120}
-      />
+    <div>
+      <div style={{height: "10em"}}>
+        <SvgBarChart
+          data={data}
+          maxNoOfDataPoints={max_no_of_data_points}
+          H={H}
+          avg={avg}
+          avgLineStrokeWidth={(H * 2) / 120}
+        />
+      </div>
       <div>
         average per block <Nectar amount={avg} />
       </div>

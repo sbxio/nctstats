@@ -1,6 +1,8 @@
 import React from "react";
 import P from "prop-types";
 
+import * as colors from "constants/colors";
+
 export const Svg = props => {
   return (
     <svg
@@ -76,8 +78,8 @@ SvgBarChart.propTypes = {
 };
 
 SvgBarChart.defaultProps = {
-  avgLineStrokeColor: "#7bfa7f",
-  barFill: "#6d3aec",
+  avgLineStrokeColor: colors.green,
+  barFill: colors.purple,
   gapW: 1,
   w: 10,
 };

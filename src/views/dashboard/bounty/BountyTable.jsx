@@ -21,9 +21,9 @@ export const BountyTable = props => {
       <tbody>
         {messages.map(message => (
           <tr key={`${Date.now()}-${message.guid}`}>
-            <td>{message.block_number}</td>
-            <td>{message.guid}</td>
-            <td>
+            <td style={{whiteSpace: "nowrap"}}>{message.block_number}</td>
+            <td style={{whiteSpace: "nowrap"}}>{message.guid}</td>
+            <td style={{whiteSpace: "nowrap"}}>
               <Nectar amount={message.amount} />
             </td>
           </tr>

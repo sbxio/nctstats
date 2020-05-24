@@ -21,9 +21,9 @@ export const AssertionTable = props => {
       <tbody>
         {messages.map(message => (
           <tr key={`${Date.now()}-${message.author}-${message.bounty_guid}`}>
-            <td>{message.block_number}</td>
-            <td>{message.bounty_guid}</td>
-            <td>
+            <td style={{whiteSpace:'nowrap'}}>{message.block_number}</td>
+            <td style={{whiteSpace:'nowrap'}}>{message.bounty_guid}</td>
+            <td style={{whiteSpace:'nowrap'}}>
               <Nectar amount={message.bid} />
             </td>
           </tr>
