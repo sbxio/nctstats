@@ -6,6 +6,7 @@ import * as colors from "constants/colors";
 import * as reducers from "constants/reducers";
 
 import {AssertionBidByBlock} from "./assertion/AssertionBidByBlock";
+import {AssertionBidByBounty} from "./assertion/AssertionBidByBounty";
 import {AssertionBidTotal} from "./assertion/AssertionBidTotal";
 import {AssertionCount} from "./assertion/AssertionCount";
 import {AssertionTable} from "./assertion/AssertionTable";
@@ -82,6 +83,8 @@ export const Dashboard = props => {
         <div>
           <h3>assertions</h3>
           <AssertionBidByBlock community={community} />
+          <VerticalDivider />
+          <AssertionBidByBounty community={community} />
           <VerticalDivider />
           <AssertionCount community={community} />
           <VerticalDivider />
