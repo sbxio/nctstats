@@ -5,12 +5,12 @@ import * as eventTypes from "./eventTypes";
 
 import * as communityActionTypes from "../community/communityActionTypes";
 
-const LIMIT = 20;
+const limit = 20;
 
 let _producer = (entity, draftState) => {
   draftState.count += 1;
   draftState.last = entity;
-  draftState.messages = [entity, ...draftState.messages.slice(0, LIMIT)];
+  draftState.messages = [entity, ...draftState.messages.slice(0, limit)];
 };
 
 export const messagesReducer = (state = {}, action) =>
@@ -45,7 +45,8 @@ export const messagesReducer = (state = {}, action) =>
             entity = new entities.MessageBounty(action.data);
             draftState = draft[action.community_url][eventTypes.BOUNTY];
             _producer(entity, draftState);
-            draftState.total_amount = (draftState.total_amount || 0) + entity.amount;
+            draftState.total_amount =
+              (draftState.total_amount || 0) + entity.amount;
             return;
 
           case eventTypes.ASSERTION:
@@ -65,7 +66,8 @@ export const messagesReducer = (state = {}, action) =>
             entity = new entity.MessageSettled(action.data);
             draftState = draft[action.community_url][eventTypes.SETTLED];
             _producer(entity, draftState);
-            draftState.total_payout = (draftState.total_payout || 0) + entity.payout;
+            draftState.total_payout =
+              (draftState.total_payout || 0) + entity.payout;
             return;
 
           default:

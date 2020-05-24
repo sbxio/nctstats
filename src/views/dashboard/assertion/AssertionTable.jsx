@@ -2,12 +2,11 @@ import React from "react";
 import {useSelector} from "react-redux";
 
 import {Nectar} from "components/Nectar";
+import * as reducers from "constants/reducers";
 import * as eventTypes from "store/messages/eventTypes";
 
-const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
-
 export const AssertionTable = props => {
-  const messages = useSelector(state => state.messages[community_id][eventTypes.ASSERTION].messages);
+  const messages = useSelector(state => state[reducers.messages][props.community][eventTypes.ASSERTION].messages);
 
   return (
     <table>
@@ -21,9 +20,9 @@ export const AssertionTable = props => {
       <tbody>
         {messages.map(message => (
           <tr key={`${Date.now()}-${message.author}-${message.bounty_guid}`}>
-            <td style={{whiteSpace:'nowrap'}}>{message.block_number}</td>
-            <td style={{whiteSpace:'nowrap'}}>{message.bounty_guid}</td>
-            <td style={{whiteSpace:'nowrap'}}>
+            <td style={{whiteSpace: "nowrap"}}>{message.block_number}</td>
+            <td style={{whiteSpace: "nowrap"}}>{message.bounty_guid}</td>
+            <td style={{whiteSpace: "nowrap"}}>
               <Nectar amount={message.bid} />
             </td>
           </tr>

@@ -1,8 +1,9 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
-import * as colors from "constants/colors";
 import {PolyswarmLogo} from "components/PolyswarmLogo";
+import * as colors from "constants/colors";
+import * as reducers from "constants/reducers";
 
 import {AssertionBidByBlock} from "./assertion/AssertionBidByBlock";
 import {AssertionBidTotal} from "./assertion/AssertionBidTotal";
@@ -14,13 +15,12 @@ import {BountyAmountTotal} from "./bounty/BountyAmountTotal";
 import {BountyCount} from "./bounty/BountyCount";
 import {BountyTable} from "./bounty/BountyTable";
 
-const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
-
 const HorizontalDivider = props => <div style={{minWidth: "1.618em"}} />;
 const VerticalDivider = props => <div style={{height: "1em"}} />;
 
 export const Dashboard = props => {
-  const connClosed = useSelector(state => state.community[community_id].connection.closed);
+  const community = useSelector(state => state[reducers.active]);
+  const isConnected = useSelector(state => state[reducers.community][community].is_connected);
 
   return (
     <section>
@@ -53,16 +53,16 @@ export const Dashboard = props => {
         >
           <span
             style={{
-              backgroundColor: connClosed ? "#f00" : colors.green,
+              backgroundColor: isConnected ? colors.green : colors.red,
               borderRadius: "50%",
               display: "inline-block",
               width: "1em",
               height: "1em",
-              animation: connClosed ? null : "beacon 1.2s infinite ease-in-out",
+              animation: isConnected && "beacon 1.2s infinite ease-in-out",
             }}
           />
           <div style={{minWidth: "0.618em"}} />
-          <span style={{whiteSpace: "nowrap"}}>{community_id}</span>
+          <span style={{whiteSpace: "nowrap"}}>{community}</span>
         </div>
       </header>
 
@@ -70,24 +70,24 @@ export const Dashboard = props => {
         <HorizontalDivider />
         <div>
           <h3>bounties</h3>
-          <BountyAmountByBlock />
+          <BountyAmountByBlock community={community} />
           <VerticalDivider />
-          <BountyCount />
+          <BountyCount community={community} />
           <VerticalDivider />
-          <BountyAmountTotal />
+          <BountyAmountTotal community={community} />
           <VerticalDivider />
-          <BountyTable />
+          <BountyTable community={community} />
         </div>
         <HorizontalDivider />
         <div>
           <h3>assertions</h3>
-          <AssertionBidByBlock />
+          <AssertionBidByBlock community={community} />
           <VerticalDivider />
-          <AssertionCount />
+          <AssertionCount community={community} />
           <VerticalDivider />
-          <AssertionBidTotal />
+          <AssertionBidTotal community={community} />
           <VerticalDivider />
-          <AssertionTable />
+          <AssertionTable community={community} />
         </div>
         <HorizontalDivider />
       </div>

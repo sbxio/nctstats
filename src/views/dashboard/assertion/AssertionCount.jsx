@@ -1,12 +1,11 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
+import * as reducers from "constants/reducers";
 import * as eventTypes from "store/messages/eventTypes";
 
-const community_id = "wss://rho.k.polyswarm.network/v1/events/?chain=side";
-
 export const AssertionCount = props => {
-  const count = useSelector(state => state.messages[community_id][eventTypes.ASSERTION].count);
+  const count = useSelector(state => state[reducers.messages][props.community][eventTypes.ASSERTION].count);
 
   return (
     <div>

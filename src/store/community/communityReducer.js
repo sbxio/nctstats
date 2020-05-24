@@ -8,6 +8,7 @@ export const communityReducer = (state = {}, action) =>
       case actionTypes.COMMUNITY_CONNECT:
         draft[action.community_url] = {
           community_url: action.community_url,
+          is_connected: false,
           connection: {
             initiated: Date.now(),
             succeded: null,
@@ -22,10 +23,12 @@ export const communityReducer = (state = {}, action) =>
         return;
 
       case actionTypes.COMMUNITY_CONNECT__SUCCEEDED:
+        draft[action.community_url].is_connected = true;
         draft[action.community_url].connection.succeded = Date.now();
         return;
 
       case actionTypes.COMMUNITY_CONNECTION__CLOSED:
+        draft[action.community_url].is_connected = false;
         draft[action.community_url].connection.closed = Date.now();
         return;
 

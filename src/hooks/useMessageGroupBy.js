@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 
+import * as reducers from "constants/reducers";
+
 export function useMessageGroupBy(
   community,
   eventType,
@@ -9,7 +11,7 @@ export function useMessageGroupBy(
   nctField,
 ) {
   const message = useSelector(
-    state => state.messages[community][eventType].last,
+    state => state[reducers.messages][community][eventType].last,
   );
   const [data, setData] = useState([]);
 
